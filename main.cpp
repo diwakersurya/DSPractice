@@ -7,7 +7,7 @@ struct node {
 int data;
 struct node *next;
 } ;
-
+//function to insert node in the beggining of the list
 void insert_node_in_beg(struct node **head,int data)
 {
 
@@ -17,6 +17,7 @@ void insert_node_in_beg(struct node **head,int data)
     (*head)=temp;
 
  }
+ //function to insert node in the end of the list
  void insert_node_in_end(struct node *head,int data)
 {
 
@@ -32,10 +33,9 @@ void insert_node_in_beg(struct node **head,int data)
    iter->next=temp;
 
  }
-
+// function to insert node in the list after a node having a particular value.
   void insert_node_after(struct node *head,int valToFind,int data)
 {
-
     struct node *temp=(node *)malloc(sizeof(struct node)) ;
     temp->data=data;
     temp->next=NULL;
@@ -50,9 +50,8 @@ void insert_node_in_beg(struct node **head,int data)
        }
      iter=iter->next;
    }
-
  }
-
+//Delete a node from the list based upon its value.
 void delete_node(struct node *head,int valToDelete)
 {
     struct node *iter=head;
@@ -71,7 +70,7 @@ void delete_node(struct node *head,int valToDelete)
    }
 
  }
-
+//traverse the list and print its elements.
  void traverse_list(struct node *head)
 {
    struct node *iter=head;
@@ -82,7 +81,32 @@ void delete_node(struct node *head,int valToDelete)
    iter=iter->next;
    }
  }
-
+ //Count the no of nodes in the list iteratively.
+  void iter_count_list(struct node *head)
+{
+    int count=0;
+   struct node *iter=head;
+   //iter !=null is satisfied when all items are read from the linked list
+   while (iter != NULL)
+   {
+   count++;
+   iter=iter->next;
+   }
+   cout<<"No of nodes is: "<<count;
+ }
+//Count the no of nodes in the list recursively.
+int rec_count_list(struct node *head)
+{
+if(head==NULL)
+{
+return 0;
+}
+else
+{
+return 1+rec_count_list(head->next);
+}
+}
+//Reverse the link list recursively.
  void rec_rev_list(struct node **head)
 {
     //8->7->6->5
@@ -131,6 +155,7 @@ curr=next;
 (*head)=prev;
  }
 
+//driver for all the functions
 int main()
 {
     struct node *head=NULL;
@@ -138,13 +163,16 @@ int main()
     insert_node_in_beg(&head,6);
     insert_node_in_beg(&head,7);
     insert_node_in_beg(&head,8);
+    insert_node_in_beg(&head,9);
    // insert_node_in_end(head,10);
    // insert_node_in_end(head,15);
    // insert_node_after(head,7,100);
    // delete_node(head,10);
    // delete_node(head,5);
-  // rec_rev_list(&head);
-  iter_rev_list(&head);
-    traverse_list(head);
+   // rec_rev_list(&head);
+   //iter_rev_list(&head);
+   // traverse_list(head);
+  // iter_count_list(head);
+  cout<<rec_count_list(head);
     return 0;
 }
